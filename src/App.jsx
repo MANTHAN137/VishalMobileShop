@@ -26,7 +26,7 @@ const DesktopNavbar = ({ setActiveTab }) => {
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <img src="/logo.png" alt="Vishal Mobile" style={{
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Vishal Mobile" style={{
             width: '45px', height: '45px', borderRadius: '50%',
             objectFit: 'cover',
             border: '2px solid #D4AF37',
@@ -280,7 +280,7 @@ function App() {
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <img src="/logo.png" alt="Vishal Mobile" style={{
+          <img src={`${import.meta.env.BASE_URL}logo.png`} alt="Vishal Mobile" style={{
             width: '42px', height: '42px', borderRadius: '50%',
             objectFit: 'cover',
             border: '2px solid #D4AF37',
