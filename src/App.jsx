@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Products from './components/Products';
 import BrandCatalog from './components/BrandCatalog';
 import Location from './components/Location';
+import Accessories from './components/Accessories';
 
 function App() {
   const [activeTab, setActiveTab] = useState('home');
@@ -23,6 +24,7 @@ function App() {
           <div>
             <Products />
             <BrandCatalog />
+            <Accessories />
           </div>
         );
       case 'contact':
@@ -45,6 +47,7 @@ function App() {
         <DesktopHero />
         <Products />
         <BrandCatalog />
+        <Accessories />
         <Testimonials />
         <Location />
         <Footer />
@@ -478,6 +481,7 @@ const DesktopNavbar = () => {
           <a href="#home" style={{ fontWeight: '500', fontSize: '0.95rem' }}>Home</a>
           <a href="#products" style={{ fontWeight: '500', fontSize: '0.95rem' }}>Products</a>
           <a href="#catalog" style={{ fontWeight: '500', fontSize: '0.95rem' }}>Brands</a>
+          <a href="#accessories" style={{ fontWeight: '500', fontSize: '0.95rem' }}>Accessories</a>
           <a href="#location" style={{ fontWeight: '500', fontSize: '0.95rem' }}>Visit Us</a>
         </div>
         <div style={{ display: 'flex', gap: '12px' }}>
