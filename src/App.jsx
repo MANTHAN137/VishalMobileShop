@@ -45,6 +45,7 @@ function App() {
         <DesktopHero />
         <Products />
         <BrandCatalog />
+        <Testimonials />
         <Location />
         <Footer />
       </div>
@@ -285,6 +286,65 @@ const MobileHome = () => (
       ))}
     </div>
 
+    {/* Special Offers */}
+    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Special Offers</h3>
+    <div style={{
+      background: 'rgba(244,63,94,0.1)',
+      border: '1px solid rgba(244,63,94,0.25)',
+      borderRadius: '14px', padding: '16px', marginBottom: '20px'
+    }}>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
+        {[
+          '🎁 Free Screen Guard on All Phones',
+          '💳 EMI Available from ₹999/month',
+          '🔄 Old Phone Exchange - Get Extra Value'
+        ].map((offer, i) => (
+          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem' }}>
+            <span style={{ color: '#25D366' }}>✓</span>
+            <span>{offer}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* Customer Reviews */}
+    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Customer Reviews</h3>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
+      {[
+        { name: 'Rahul S.', review: 'Best prices in Badnera! Got my iPhone here. Fully genuine.', rating: 5 },
+        { name: 'Priya M.', review: 'Excellent service. Helped me choose the right phone for my budget.', rating: 5 },
+        { name: 'Amit K.', review: 'Buying from Vishal Mobile for 5 years. Always satisfied.', rating: 5 }
+      ].map((item, i) => (
+        <div key={i} style={{
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.08)',
+          borderRadius: '14px', padding: '16px'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
+            <span style={{ fontWeight: '700', fontSize: '0.9rem' }}>{item.name}</span>
+            <span style={{ color: '#D4AF37', fontSize: '0.85rem' }}>{'★'.repeat(item.rating)}</span>
+          </div>
+          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>"{item.review}"</p>
+        </div>
+      ))}
+    </div>
+
+    {/* Google Rating */}
+    <div style={{
+      background: 'rgba(212,175,55,0.1)',
+      border: '1px solid rgba(212,175,55,0.25)',
+      borderRadius: '14px', padding: '16px', marginBottom: '20px',
+      display: 'flex', alignItems: 'center', justifyContent: 'space-between'
+    }}>
+      <div>
+        <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>Google Rating</div>
+        <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Based on 100+ reviews</div>
+      </div>
+      <div style={{ textAlign: 'right' }}>
+        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#D4AF37' }}>4.8★</div>
+      </div>
+    </div>
+
     {/* Instagram CTA */}
     <a href="https://www.instagram.com/badnera_phonewala" target="_blank" rel="noopener noreferrer"
       style={{
@@ -297,7 +357,7 @@ const MobileHome = () => (
         fontSize: '0.9rem',
         boxShadow: '0 4px 20px rgba(253,29,29,0.3)'
       }}>
-      📸 Follow @badnera_phonewala for Latest Updates
+      📸 Follow @badnera_phonewala for Updates
     </a>
   </div>
 );
@@ -532,6 +592,39 @@ const DesktopHero = () => (
             <div style={{ fontWeight: '600', color: '#D4AF37', fontSize: '0.9rem' }}>MOBILE</div>
           </div>
         </div>
+      </div>
+    </div>
+  </section>
+);
+
+// Testimonials Section
+const Testimonials = () => (
+  <section style={{ padding: '80px 0', background: 'linear-gradient(180deg, #0a0a0a, #050505)' }}>
+    <div className="container">
+      <h2 style={{ textAlign: 'center', fontSize: '2.5rem', marginBottom: '50px', fontWeight: '800' }}>
+        What Our <span className="gradient-text">Customers Say</span>
+      </h2>
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+        {[
+          { name: 'Rahul Sharma', text: 'Got my iPhone 15 Pro here at the best price in Amravati. Excellent service and genuine product!', rating: 5 },
+          { name: 'Priya Mehta', text: 'Been buying phones from Vishal Mobile for 5 years. Always trusted and reliable.', rating: 5 },
+          { name: 'Amit Kumar', text: 'Quick service, best prices, and they even helped set up my new Samsung. Highly recommend!', rating: 5 }
+        ].map((review, i) => (
+          <div key={i} style={{
+            background: 'rgba(255,255,255,0.03)',
+            border: '1px solid rgba(255,255,255,0.08)',
+            borderRadius: '20px', padding: '30px',
+            transition: 'all 0.3s ease'
+          }}>
+            <div style={{ color: '#D4AF37', fontSize: '1.2rem', marginBottom: '16px' }}>
+              {'★'.repeat(review.rating)}
+            </div>
+            <p style={{ fontSize: '1.05rem', color: 'rgba(255,255,255,0.8)', marginBottom: '20px', lineHeight: '1.7' }}>
+              "{review.text}"
+            </p>
+            <div style={{ fontWeight: '700', fontSize: '1rem' }}>— {review.name}</div>
+          </div>
+        ))}
       </div>
     </div>
   </section>
