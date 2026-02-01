@@ -24,9 +24,10 @@ function App() {
           <div>
             <Products />
             <BrandCatalog />
-            <Accessories />
           </div>
         );
+      case 'accessories':
+        return <Accessories />;
       case 'contact':
         return (
           <div>
@@ -46,8 +47,8 @@ function App() {
         <DesktopNavbar />
         <DesktopHero />
         <Products />
-        <BrandCatalog />
         <Accessories />
+        <BrandCatalog />
         <Testimonials />
         <Location />
         <Footer />
@@ -115,7 +116,8 @@ function App() {
       }}>
         {[
           { id: 'home', label: 'Home', icon: '🏠' },
-          { id: 'products', label: 'Products', icon: '📱' },
+          { id: 'products', label: 'Phones', icon: '📱' },
+          { id: 'accessories', label: 'Access..', icon: '🎧' },
           { id: 'contact', label: 'Contact', icon: '📍' }
         ].map(tab => (
           <button
@@ -123,7 +125,7 @@ function App() {
             onClick={() => setActiveTab(tab.id)}
             style={{
               flex: 1,
-              padding: '10px 8px',
+              padding: '10px 4px',
               background: activeTab === tab.id
                 ? 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.1))'
                 : 'rgba(255,255,255,0.03)',
@@ -132,7 +134,7 @@ function App() {
                 : '1px solid transparent',
               borderRadius: '10px',
               color: activeTab === tab.id ? 'white' : 'rgba(255,255,255,0.5)',
-              fontSize: '0.8rem',
+              fontSize: '0.75rem',
               fontWeight: '600',
               cursor: 'pointer',
               transition: 'all 0.3s ease',
