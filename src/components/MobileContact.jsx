@@ -58,6 +58,23 @@ const MobileContact = () => {
                         Amravati, Maharashtra 444701
                     </p>
 
+                    {/* Embedded Map */}
+                    <div className="premium-card" style={{
+                        height: '200px', width: '100%', borderRadius: '16px', overflow: 'hidden', marginBottom: '20px',
+                        border: '1px solid rgba(255,255,255,0.1)'
+                    }}>
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15259.605396582496!2d77.7289528!3d20.8543312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bd6babb0fef53d7%3A0x21e0fc7b8f0e3b75!2sVishal%20Mobile%20Shopee!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+                            width="100%"
+                            height="100%"
+                            style={{ border: 0, filter: 'invert(90%) hue-rotate(180deg)' }}
+                            allowFullScreen=""
+                            loading="lazy"
+                            referrerPolicy="no-referrer-when-downgrade"
+                            title="Vishal Mobile Shop Location"
+                        ></iframe>
+                    </div>
+
                     <div style={{ background: 'rgba(255,255,255,0.03)', padding: '16px', borderRadius: '16px' }}>
                         <div style={{ fontSize: '0.85rem', fontWeight: '700', marginBottom: '12px', color: 'var(--gold)' }}>🕒 OPENING HOURS</div>
                         <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.9rem' }}>

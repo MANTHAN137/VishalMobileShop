@@ -231,8 +231,8 @@ function App() {
       case 'products':
         return (
           <div className="animate-fade-in-up" style={{ padding: '20px 0' }}>
-            <Products />
             <BrandCatalog />
+            <Products />
           </div>
         );
       case 'accessories':
