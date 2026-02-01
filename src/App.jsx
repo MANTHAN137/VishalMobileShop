@@ -26,13 +26,12 @@ const DesktopNavbar = ({ setActiveTab }) => {
     }}>
       <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
         <a href="#" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-          <div style={{
-            width: '45px', height: '45px', borderRadius: '12px',
-            background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 20px rgba(212,175,55,0.3)',
-            fontSize: '1.4rem'
-          }}>📱</div>
+          <img src="/logo.png" alt="Vishal Mobile" style={{
+            width: '45px', height: '45px', borderRadius: '50%',
+            objectFit: 'cover',
+            border: '2px solid #D4AF37',
+            boxShadow: '0 4px 20px rgba(212,175,55,0.3)'
+          }} />
           <div>
             <div style={{ fontWeight: '800', fontSize: '1.1rem' }}>Vishal Mobile</div>
             <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>Premium Store</div>
@@ -281,14 +280,12 @@ function App() {
         borderBottom: '1px solid rgba(255,255,255,0.08)'
       }}>
         <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '38px', height: '38px', borderRadius: '10px',
-            background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
+          <img src="/logo.png" alt="Vishal Mobile" style={{
+            width: '42px', height: '42px', borderRadius: '50%',
+            objectFit: 'cover',
+            border: '2px solid #D4AF37',
             boxShadow: '0 4px 15px rgba(212,175,55,0.3)'
-          }}>
-            <span style={{ fontSize: '1.2rem' }}>📱</span>
-          </div>
+          }} />
           <div>
             <div style={{ fontWeight: '700', fontSize: '0.95rem', letterSpacing: '-0.02em' }}>Vishal Mobile</div>
             <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', marginTop: '-2px' }}>Premium Store</div>
