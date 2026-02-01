@@ -109,35 +109,36 @@ const BrandCatalog = () => {
     const [activeBrand, setActiveBrand] = useState('Apple');
 
     return (
-        <section id="catalog" style={{ padding: '5rem 0', background: 'linear-gradient(180deg, var(--bg-dark) 0%, #0d0d0d 100%)' }}>
-            <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                    <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Shop by <span className="gradient-text">Brand</span></h2>
-                    <p style={{ color: 'var(--text-muted)' }}>Latest launches with current market prices (as of Feb 2026)</p>
+        <section id="catalog" className="section-padding" style={{ background: 'linear-gradient(180deg, var(--bg-dark) 0%, #0d0d0d 100%)' }}>
+            <div className="container animate-fade-in-up">
+                <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+                    <h2 style={{ fontSize: '2.2rem', marginBottom: '0.5rem' }}>Shop by <span className="gradient-text">Brand</span></h2>
+                    <p style={{ color: 'var(--text-muted)', fontSize: '0.9rem' }}>Latest launches with current market prices</p>
                 </div>
 
                 {/* Brand Tabs */}
-                <div style={{
+                <div className="no-scrollbar" style={{
                     display: 'flex',
-                    flexWrap: 'wrap',
-                    gap: '0.75rem',
+                    flexWrap: 'wrap', // Or 'nowrap' for horizontal scroll if desired, but wrapping is good for quick visual scan
+                    gap: '10px',
                     justifyContent: 'center',
-                    marginBottom: '3rem'
+                    marginBottom: '2.5rem'
                 }}>
                     {brands.map(brand => (
                         <button
                             key={brand}
                             onClick={() => setActiveBrand(brand)}
                             style={{
-                                padding: '0.6rem 1.25rem',
+                                padding: '10px 20px',
                                 borderRadius: '99px',
-                                border: activeBrand === brand ? `2px solid ${brandData[brand].color}` : '1px solid var(--glass-border)',
-                                background: activeBrand === brand ? 'rgba(255,255,255,0.05)' : 'transparent',
-                                color: activeBrand === brand ? brandData[brand].color : 'var(--text-muted)',
+                                border: activeBrand === brand ? `1px solid ${brandData[brand].color}` : '1px solid var(--glass-border)',
+                                background: activeBrand === brand ? `linear-gradient(135deg, ${brandData[brand].color}33, ${brandData[brand].color}11)` : 'rgba(255,255,255,0.03)',
+                                color: activeBrand === brand ? 'white' : 'var(--text-muted)',
                                 cursor: 'pointer',
-                                fontWeight: '600',
-                                fontSize: '0.9rem',
-                                transition: 'all 0.3s ease'
+                                fontWeight: '700',
+                                fontSize: '0.85rem',
+                                transition: 'all 0.3s ease',
+                                boxShadow: activeBrand === brand ? `0 4px 12px ${brandData[brand].color}40` : 'none'
                             }}
                         >
                             {brand}
@@ -146,18 +147,20 @@ const BrandCatalog = () => {
                 </div>
 
                 {/* Phone List for Active Brand */}
-                <div className="glass-panel" style={{ padding: '2rem', borderColor: brandData[activeBrand].color, borderWidth: '2px' }}>
+                <div className="glass-effect premium-card animate-scale-in" style={{ padding: '1.5rem', borderColor: brandData[activeBrand].color, borderWidth: '1px' }}>
                     <h3 style={{
-                        fontSize: '1.75rem',
+                        fontSize: '1.5rem',
                         marginBottom: '1.5rem',
                         color: brandData[activeBrand].color,
                         display: 'flex',
                         alignItems: 'center',
-                        gap: '0.75rem'
+                        gap: '0.75rem',
+                        borderBottom: `1px solid ${brandData[activeBrand].color}30`,
+                        paddingBottom: '0.75rem'
                     }}>
                         {activeBrand}
                         <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', fontWeight: '400' }}>
-                            ({brandData[activeBrand].phones.length} models)
+                            ({brandData[activeBrand].phones.length})
                         </span>
                     </h3>
 
@@ -165,38 +168,31 @@ const BrandCatalog = () => {
                         {brandData[activeBrand].phones.map((phone, index) => (
                             <div
                                 key={index}
+                                className="premium-card"
                                 style={{
                                     display: 'flex',
                                     justifyContent: 'space-between',
                                     alignItems: 'center',
-                                    padding: '1rem 1.25rem',
-                                    background: 'rgba(255,255,255,0.03)',
-                                    borderRadius: '0.75rem',
-                                    border: '1px solid var(--glass-border)',
+                                    padding: '1rem',
+                                    background: 'rgba(255,255,255,0.02)',
+                                    borderRadius: '12px',
+                                    border: '1px solid rgba(255,255,255,0.05)',
                                     transition: 'all 0.3s ease'
-                                }}
-                                onMouseOver={(e) => {
-                                    e.currentTarget.style.background = 'rgba(255,255,255,0.08)';
-                                    e.currentTarget.style.transform = 'translateX(5px)';
-                                }}
-                                onMouseOut={(e) => {
-                                    e.currentTarget.style.background = 'rgba(255,255,255,0.03)';
-                                    e.currentTarget.style.transform = 'translateX(0)';
                                 }}
                             >
                                 <div>
-                                    <p style={{ fontWeight: '600', fontSize: '1rem', marginBottom: '0.25rem' }}>{phone.name}</p>
-                                    <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>{phone.spec}</p>
+                                    <p style={{ fontWeight: '700', fontSize: '1rem', marginBottom: '0.25rem', color: '#fff' }}>{phone.name}</p>
+                                    <p style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>{phone.spec}</p>
                                 </div>
                                 <div style={{ textAlign: 'right' }}>
-                                    <p style={{ fontWeight: '700', fontSize: '1.1rem', color: brandData[activeBrand].color }}>{phone.price}</p>
+                                    <p style={{ fontWeight: '700', fontSize: '1rem', color: brandData[activeBrand].color, marginBottom: '4px' }}>{phone.price}</p>
                                     <a
                                         href={`https://wa.me/919370763601?text=Hi, I want to enquire about ${phone.name}`}
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        style={{ fontSize: '0.75rem', color: '#25D366', fontWeight: '600' }}
+                                        style={{ fontSize: '0.75rem', color: '#25D366', fontWeight: '600', display: 'inline-flex', alignItems: 'center', gap: '4px' }}
                                     >
-                                        Enquire →
+                                        Buy Now →
                                     </a>
                                 </div>
                             </div>

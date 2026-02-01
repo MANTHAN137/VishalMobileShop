@@ -3,452 +3,11 @@ import Products from './components/Products';
 import BrandCatalog from './components/BrandCatalog';
 import Location from './components/Location';
 import Accessories from './components/Accessories';
+import MobileHome from './components/MobileHome';
+import MobileContact from './components/MobileContact';
 
-function App() {
-  const [activeTab, setActiveTab] = useState('home');
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
-
-  const renderMobileContent = () => {
-    switch (activeTab) {
-      case 'home':
-        return <MobileHome />;
-      case 'products':
-        return (
-          <div>
-            <Products />
-            <BrandCatalog />
-          </div>
-        );
-      case 'accessories':
-        return <Accessories />;
-      case 'contact':
-        return (
-          <div>
-            <Location />
-            <MobileContact />
-          </div>
-        );
-      default:
-        return <MobileHome />;
-    }
-  };
-
-  // Desktop Version
-  if (!isMobile) {
-    return (
-      <div className="App" style={{ background: '#050505', minHeight: '100vh' }}>
-        <DesktopNavbar />
-        <DesktopHero />
-        <Products />
-        <Accessories />
-        <BrandCatalog />
-        <Testimonials />
-        <Location />
-        <Footer />
-      </div>
-    );
-  }
-
-  // Mobile Version
-  return (
-    <div className="App" style={{ background: '#050505', minHeight: '100vh' }}>
-      {/* Premium Mobile Header */}
-      <header style={{
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        background: 'linear-gradient(180deg, rgba(5,5,5,1) 0%, rgba(5,5,5,0.95) 100%)',
-        backdropFilter: 'blur(20px)',
-        padding: '12px 16px',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        zIndex: 1000,
-        borderBottom: '1px solid rgba(255,255,255,0.08)'
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-          <div style={{
-            width: '38px', height: '38px', borderRadius: '10px',
-            background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
-            display: 'flex', alignItems: 'center', justifyContent: 'center',
-            boxShadow: '0 4px 15px rgba(212,175,55,0.3)'
-          }}>
-            <span style={{ fontSize: '1.2rem' }}>📱</span>
-          </div>
-          <div>
-            <div style={{ fontWeight: '700', fontSize: '0.95rem', letterSpacing: '-0.02em' }}>Vishal Mobile</div>
-            <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', marginTop: '-2px' }}>Premium Store</div>
-          </div>
-        </div>
-        <a href="https://wa.me/919370763601" target="_blank" rel="noopener noreferrer"
-          style={{
-            background: 'linear-gradient(135deg, #25D366, #128C7E)',
-            color: 'white', padding: '8px 16px', borderRadius: '8px',
-            fontSize: '0.8rem', fontWeight: '600',
-            boxShadow: '0 4px 15px rgba(37,211,102,0.3)',
-            display: 'flex', alignItems: 'center', gap: '6px'
-          }}>
-          <span>💬</span> Chat
-        </a>
-      </header>
-
-      {/* Premium Tab Navigation */}
-      <nav style={{
-        position: 'fixed',
-        top: '62px',
-        left: 0,
-        right: 0,
-        background: 'rgba(10,10,10,0.98)',
-        backdropFilter: 'blur(20px)',
-        display: 'flex',
-        padding: '8px 12px',
-        gap: '8px',
-        zIndex: 999,
-        borderBottom: '1px solid rgba(255,255,255,0.05)'
-      }}>
-        {[
-          { id: 'home', label: 'Home', icon: '🏠' },
-          { id: 'products', label: 'Phones', icon: '📱' },
-          { id: 'accessories', label: 'Access..', icon: '🎧' },
-          { id: 'contact', label: 'Contact', icon: '📍' }
-        ].map(tab => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id)}
-            style={{
-              flex: 1,
-              padding: '10px 4px',
-              background: activeTab === tab.id
-                ? 'linear-gradient(135deg, rgba(139,92,246,0.2), rgba(6,182,212,0.1))'
-                : 'rgba(255,255,255,0.03)',
-              border: activeTab === tab.id
-                ? '1px solid rgba(139,92,246,0.3)'
-                : '1px solid transparent',
-              borderRadius: '10px',
-              color: activeTab === tab.id ? 'white' : 'rgba(255,255,255,0.5)',
-              fontSize: '0.75rem',
-              fontWeight: '600',
-              cursor: 'pointer',
-              transition: 'all 0.3s ease',
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              gap: '4px'
-            }}
-          >
-            <span style={{ fontSize: '1.1rem' }}>{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
-      </nav>
-
-      {/* Tab Content */}
-      <main style={{ paddingTop: '130px', minHeight: '100vh', background: '#050505' }}>
-        {renderMobileContent()}
-      </main>
-
-      <Footer />
-    </div>
-  );
-}
-
-// Premium Mobile Home
-const MobileHome = () => (
-  <div style={{ padding: '0 16px 24px' }}>
-    {/* Hero Card */}
-    <div style={{
-      background: 'linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%)',
-      borderRadius: '20px',
-      padding: '24px 20px',
-      marginBottom: '20px',
-      border: '1px solid rgba(255,255,255,0.08)',
-      position: 'relative',
-      overflow: 'hidden'
-    }}>
-      <div style={{
-        position: 'absolute', top: '-30px', right: '-30px',
-        width: '120px', height: '120px',
-        background: 'radial-gradient(circle, rgba(139,92,246,0.3), transparent)',
-        borderRadius: '50%', filter: 'blur(30px)'
-      }} />
-
-      <span style={{
-        display: 'inline-block',
-        padding: '6px 12px',
-        background: 'rgba(212,175,55,0.15)',
-        border: '1px solid rgba(212,175,55,0.3)',
-        borderRadius: '20px',
-        fontSize: '0.7rem',
-        color: '#D4AF37',
-        fontWeight: '600',
-        marginBottom: '16px'
-      }}>
-        ✨ #1 Mobile Shop in Badnera
-      </span>
-
-      <h1 style={{ fontSize: '1.6rem', marginBottom: '10px', lineHeight: '1.2', fontWeight: '800' }}>
-        Your Trusted<br />
-        <span style={{
-          background: 'linear-gradient(90deg, #8B5CF6, #06B6D4, #D4AF37)',
-          WebkitBackgroundClip: 'text',
-          WebkitTextFillColor: 'transparent'
-        }}>Mobile Partner</span>
-      </h1>
-
-      <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', marginBottom: '20px', lineHeight: '1.5' }}>
-        Premium smartphones at unbeatable prices. Original products with warranty.
-      </p>
-
-      <div style={{ display: 'flex', gap: '10px' }}>
-        <a href="https://wa.me/919370763601"
-          style={{
-            flex: 1, padding: '12px',
-            background: 'linear-gradient(135deg, #8B5CF6, #06B6D4)',
-            borderRadius: '10px', textAlign: 'center',
-            fontSize: '0.85rem', fontWeight: '600',
-            boxShadow: '0 4px 20px rgba(139,92,246,0.4)'
-          }}>
-          💬 Get Quote
-        </a>
-        <a href="https://www.instagram.com/badnera_phonewala" target="_blank" rel="noopener noreferrer"
-          style={{
-            flex: 1, padding: '12px',
-            background: 'rgba(255,255,255,0.08)',
-            border: '1px solid rgba(255,255,255,0.15)',
-            borderRadius: '10px', textAlign: 'center',
-            fontSize: '0.85rem', fontWeight: '600'
-          }}>
-          📸 Instagram
-        </a>
-      </div>
-    </div>
-
-    {/* Stats Bar */}
-    <div style={{
-      display: 'flex', gap: '10px', marginBottom: '20px'
-    }}>
-      {[
-        { value: '5000+', label: 'Happy Customers' },
-        { value: '50+', label: 'Phone Models' },
-        { value: '5★', label: 'Rating' }
-      ].map((stat, i) => (
-        <div key={i} style={{
-          flex: 1, background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '12px', padding: '14px 8px', textAlign: 'center'
-        }}>
-          <div style={{ fontSize: '1.1rem', fontWeight: '800', color: '#D4AF37' }}>{stat.value}</div>
-          <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', marginTop: '2px' }}>{stat.label}</div>
-        </div>
-      ))}
-    </div>
-
-    {/* Features Grid */}
-    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Why Choose Us</h3>
-    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '10px', marginBottom: '20px' }}>
-      {[
-        { icon: '✅', title: '100% Original', desc: 'Genuine products only' },
-        { icon: '🏷️', title: 'Best Prices', desc: 'Market lowest rates' },
-        { icon: '🔧', title: 'Free Service', desc: '1 year support' },
-        { icon: '🚚', title: 'Home Delivery', desc: 'Free in Badnera' }
-      ].map((item, i) => (
-        <div key={i} style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '14px', padding: '16px 12px'
-        }}>
-          <div style={{ fontSize: '1.4rem', marginBottom: '8px' }}>{item.icon}</div>
-          <div style={{ fontWeight: '700', fontSize: '0.85rem', marginBottom: '4px' }}>{item.title}</div>
-          <div style={{ fontSize: '0.7rem', color: 'rgba(255,255,255,0.5)' }}>{item.desc}</div>
-        </div>
-      ))}
-    </div>
-
-    {/* Brand Logos */}
-    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Authorized Dealer</h3>
-    <div style={{
-      display: 'flex', gap: '8px', flexWrap: 'wrap', marginBottom: '20px'
-    }}>
-      {['Apple', 'Samsung', 'OnePlus', 'Vivo', 'Oppo', 'Realme', 'iQOO', 'Poco'].map(brand => (
-        <span key={brand} style={{
-          padding: '8px 14px',
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
-          border: '1px solid rgba(255,255,255,0.1)',
-          borderRadius: '8px',
-          fontSize: '0.75rem',
-          fontWeight: '600'
-        }}>
-          {brand}
-        </span>
-      ))}
-    </div>
-
-    {/* Special Offers */}
-    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Special Offers</h3>
-    <div style={{
-      background: 'rgba(244,63,94,0.1)',
-      border: '1px solid rgba(244,63,94,0.25)',
-      borderRadius: '14px', padding: '16px', marginBottom: '20px'
-    }}>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        {[
-          '🎁 Free Screen Guard on All Phones',
-          '💳 EMI Available from ₹999/month',
-          '🔄 Old Phone Exchange - Get Extra Value'
-        ].map((offer, i) => (
-          <div key={i} style={{ display: 'flex', alignItems: 'center', gap: '10px', fontSize: '0.85rem' }}>
-            <span style={{ color: '#25D366' }}>✓</span>
-            <span>{offer}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-
-    {/* Customer Reviews */}
-    <h3 style={{ fontSize: '0.9rem', marginBottom: '12px', fontWeight: '700' }}>Customer Reviews</h3>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', marginBottom: '20px' }}>
-      {[
-        { name: 'Rahul S.', review: 'Best prices in Badnera! Got my iPhone here. Fully genuine.', rating: 5 },
-        { name: 'Priya M.', review: 'Excellent service. Helped me choose the right phone for my budget.', rating: 5 },
-        { name: 'Amit K.', review: 'Buying from Vishal Mobile for 5 years. Always satisfied.', rating: 5 }
-      ].map((item, i) => (
-        <div key={i} style={{
-          background: 'rgba(255,255,255,0.03)',
-          border: '1px solid rgba(255,255,255,0.08)',
-          borderRadius: '14px', padding: '16px'
-        }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '8px' }}>
-            <span style={{ fontWeight: '700', fontSize: '0.9rem' }}>{item.name}</span>
-            <span style={{ color: '#D4AF37', fontSize: '0.85rem' }}>{'★'.repeat(item.rating)}</span>
-          </div>
-          <p style={{ fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', lineHeight: '1.4' }}>"{item.review}"</p>
-        </div>
-      ))}
-    </div>
-
-    {/* Google Rating */}
-    <div style={{
-      background: 'rgba(212,175,55,0.1)',
-      border: '1px solid rgba(212,175,55,0.25)',
-      borderRadius: '14px', padding: '16px', marginBottom: '20px',
-      display: 'flex', alignItems: 'center', justifyContent: 'space-between'
-    }}>
-      <div>
-        <div style={{ fontWeight: '700', fontSize: '0.95rem' }}>Google Rating</div>
-        <div style={{ fontSize: '0.8rem', color: 'rgba(255,255,255,0.6)' }}>Based on 100+ reviews</div>
-      </div>
-      <div style={{ textAlign: 'right' }}>
-        <div style={{ fontSize: '1.5rem', fontWeight: '800', color: '#D4AF37' }}>4.8★</div>
-      </div>
-    </div>
-
-    {/* Instagram CTA */}
-    <a href="https://www.instagram.com/badnera_phonewala" target="_blank" rel="noopener noreferrer"
-      style={{
-        display: 'block',
-        background: 'linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045)',
-        padding: '16px',
-        borderRadius: '14px',
-        textAlign: 'center',
-        fontWeight: '700',
-        fontSize: '0.9rem',
-        boxShadow: '0 4px 20px rgba(253,29,29,0.3)'
-      }}>
-      📸 Follow @badnera_phonewala for Updates
-    </a>
-  </div>
-);
-
-// Mobile Contact Section
-const MobileContact = () => (
-  <div style={{ padding: '20px 16px' }}>
-    <h3 style={{ fontSize: '1rem', marginBottom: '16px', fontWeight: '700' }}>Quick Connect</h3>
-    <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-      <a href="tel:9370763601" style={{
-        display: 'flex', alignItems: 'center', gap: '14px',
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
-        border: '1px solid rgba(255,255,255,0.1)',
-        padding: '16px', borderRadius: '14px'
-      }}>
-        <div style={{
-          width: '45px', height: '45px', borderRadius: '12px',
-          background: 'linear-gradient(135deg, #4CAF50, #2E7D32)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.2rem'
-        }}>📞</div>
-        <div>
-          <div style={{ fontWeight: '700', fontSize: '1rem' }}>9370763601</div>
-          <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Primary Number • Tap to Call</div>
-        </div>
-      </a>
-
-      <a href="tel:7499889672" style={{
-        display: 'flex', alignItems: 'center', gap: '14px',
-        background: 'linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02))',
-        border: '1px solid rgba(255,255,255,0.1)',
-        padding: '16px', borderRadius: '14px'
-      }}>
-        <div style={{
-          width: '45px', height: '45px', borderRadius: '12px',
-          background: 'linear-gradient(135deg, #2196F3, #1565C0)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.2rem'
-        }}>📱</div>
-        <div>
-          <div style={{ fontWeight: '700', fontSize: '1rem' }}>7499889672</div>
-          <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Secondary Number • Tap to Call</div>
-        </div>
-      </a>
-
-      <a href="https://wa.me/919370763601" target="_blank" rel="noopener noreferrer" style={{
-        display: 'flex', alignItems: 'center', gap: '14px',
-        background: 'linear-gradient(135deg, rgba(37,211,102,0.15), rgba(37,211,102,0.05))',
-        border: '1px solid rgba(37,211,102,0.3)',
-        padding: '16px', borderRadius: '14px'
-      }}>
-        <div style={{
-          width: '45px', height: '45px', borderRadius: '12px',
-          background: 'linear-gradient(135deg, #25D366, #128C7E)',
-          display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.2rem'
-        }}>💬</div>
-        <div>
-          <div style={{ fontWeight: '700', fontSize: '1rem', color: '#25D366' }}>Chat on WhatsApp</div>
-          <div style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.5)' }}>Get Instant Response</div>
-        </div>
-      </a>
-    </div>
-
-    {/* Business Hours */}
-    <div style={{
-      marginTop: '20px', padding: '16px',
-      background: 'rgba(255,255,255,0.03)',
-      border: '1px solid rgba(255,255,255,0.08)',
-      borderRadius: '14px'
-    }}>
-      <div style={{ fontWeight: '700', marginBottom: '10px', fontSize: '0.9rem' }}>🕐 Business Hours</div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)' }}>
-        <span>Mon - Sat</span>
-        <span style={{ fontWeight: '600' }}>10:00 AM - 9:00 PM</span>
-      </div>
-      <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.85rem', color: 'rgba(255,255,255,0.7)', marginTop: '6px' }}>
-        <span>Sunday</span>
-        <span style={{ fontWeight: '600' }}>11:00 AM - 6:00 PM</span>
-      </div>
-    </div>
-  </div>
-);
-
-// Desktop Navbar
-const DesktopNavbar = () => {
+// Desktop Components
+const DesktopNavbar = ({ setActiveTab }) => {
   const [scrolled, setScrolled] = useState(false);
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -507,7 +66,6 @@ const DesktopNavbar = () => {
   );
 };
 
-// Desktop Hero
 const DesktopHero = () => (
   <section id="home" style={{
     minHeight: '100vh', display: 'flex', alignItems: 'center', position: 'relative',
@@ -527,7 +85,7 @@ const DesktopHero = () => (
     }} />
 
     <div className="container" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '60px', alignItems: 'center', position: 'relative', zIndex: 1 }}>
-      <div>
+      <div className="animate-fade-in-up">
         <span style={{
           display: 'inline-block', padding: '8px 16px',
           background: 'rgba(212,175,55,0.1)', border: '1px solid rgba(212,175,55,0.3)',
@@ -552,13 +110,15 @@ const DesktopHero = () => (
             padding: '14px 32px', borderRadius: '12px',
             background: 'linear-gradient(135deg, #8B5CF6, #06B6D4)',
             fontWeight: '700', fontSize: '1rem',
-            boxShadow: '0 8px 30px rgba(139,92,246,0.4)'
+            boxShadow: '0 8px 30px rgba(139,92,246,0.4)',
+            border: 'none', cursor: 'pointer', color: 'white'
           }}>Browse Collection</a>
           <a href="#location" style={{
             padding: '14px 32px', borderRadius: '12px',
             background: 'rgba(255,255,255,0.08)',
             border: '1px solid rgba(255,255,255,0.2)',
-            fontWeight: '600', fontSize: '1rem'
+            fontWeight: '600', fontSize: '1rem',
+            cursor: 'pointer', color: 'white'
           }}>Visit Store</a>
         </div>
 
@@ -578,7 +138,7 @@ const DesktopHero = () => (
       </div>
 
       {/* Phone Mockup */}
-      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+      <div className="animate-float" style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
         <div style={{
           width: '300px', height: '580px',
           background: 'linear-gradient(145deg, #1a1a1a, #0a0a0a)',
@@ -603,7 +163,6 @@ const DesktopHero = () => (
   </section>
 );
 
-// Testimonials Section
 const Testimonials = () => (
   <section style={{ padding: '80px 0', background: 'linear-gradient(180deg, #0a0a0a, #050505)' }}>
     <div className="container">
@@ -616,7 +175,7 @@ const Testimonials = () => (
           { name: 'Priya Mehta', text: 'Been buying phones from Vishal Mobile for 5 years. Always trusted and reliable.', rating: 5 },
           { name: 'Amit Kumar', text: 'Quick service, best prices, and they even helped set up my new Samsung. Highly recommend!', rating: 5 }
         ].map((review, i) => (
-          <div key={i} style={{
+          <div key={i} className="premium-card" style={{
             background: 'rgba(255,255,255,0.03)',
             border: '1px solid rgba(255,255,255,0.08)',
             borderRadius: '20px', padding: '30px',
@@ -636,7 +195,6 @@ const Testimonials = () => (
   </section>
 );
 
-// Footer
 const Footer = () => (
   <footer style={{
     background: 'linear-gradient(180deg, #0a0a0a, #050505)',
@@ -654,5 +212,156 @@ const Footer = () => (
     </p>
   </footer>
 );
+
+function App() {
+  const [activeTab, setActiveTab] = useState('home');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth <= 768);
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const renderMobileContent = () => {
+    switch (activeTab) {
+      case 'home':
+        return <MobileHome setActiveTab={setActiveTab} />;
+      case 'products':
+        return (
+          <div className="animate-fade-in-up" style={{ padding: '20px 0' }}>
+            <Products />
+            <BrandCatalog />
+          </div>
+        );
+      case 'accessories':
+        return (
+          <div className="animate-fade-in-up">
+            <Accessories />
+          </div>
+        );
+      case 'contact':
+        return <MobileContact />;
+      default:
+        return <MobileHome setActiveTab={setActiveTab} />;
+    }
+  };
+
+  // Desktop Version
+  if (!isMobile) {
+    return (
+      <div className="App" style={{ background: '#050505', minHeight: '100vh' }}>
+        <DesktopNavbar setActiveTab={setActiveTab} />
+        <DesktopHero />
+        <Products />
+        <Accessories />
+        <BrandCatalog />
+        <Testimonials />
+        <Location />
+        <Footer />
+      </div>
+    );
+  }
+
+  // Mobile Version
+  return (
+    <div className="App" style={{ background: '#050505', minHeight: '100vh' }}>
+      {/* Premium Mobile Header - Glassmorphism */}
+      <header className="glass-effect" style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        padding: '12px 16px',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        zIndex: 1000,
+        borderBottom: '1px solid rgba(255,255,255,0.08)'
+      }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <div style={{
+            width: '38px', height: '38px', borderRadius: '10px',
+            background: 'linear-gradient(135deg, #D4AF37, #B8860B)',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            boxShadow: '0 4px 15px rgba(212,175,55,0.3)'
+          }}>
+            <span style={{ fontSize: '1.2rem' }}>📱</span>
+          </div>
+          <div>
+            <div style={{ fontWeight: '700', fontSize: '0.95rem', letterSpacing: '-0.02em' }}>Vishal Mobile</div>
+            <div style={{ fontSize: '0.65rem', color: 'rgba(255,255,255,0.5)', marginTop: '-2px' }}>Premium Store</div>
+          </div>
+        </div>
+        <a href="https://wa.me/919370763601" target="_blank" rel="noopener noreferrer"
+          style={{
+            background: 'linear-gradient(135deg, #25D366, #128C7E)',
+            color: 'white', padding: '8px 16px', borderRadius: '8px',
+            fontSize: '0.8rem', fontWeight: '600',
+            boxShadow: '0 4px 15px rgba(37,211,102,0.3)',
+            display: 'flex', alignItems: 'center', gap: '6px',
+            textDecoration: 'none'
+          }}>
+          <span>💬</span> Chat
+        </a>
+      </header>
+
+      {/* Floating Tab Navigation */}
+      <nav className="glass-effect" style={{
+        position: 'fixed',
+        bottom: '20px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        width: '90%',
+        borderRadius: '24px',
+        display: 'flex',
+        padding: '8px',
+        gap: '4px',
+        zIndex: 999,
+        justifyContent: 'space-between',
+        boxShadow: '0 10px 40px rgba(0,0,0,0.5)'
+      }}>
+        {[
+          { id: 'home', label: 'Home', icon: '🏠' },
+          { id: 'products', label: 'Phones', icon: '📱' },
+          { id: 'accessories', label: 'Audio', icon: '🎧' },
+          { id: 'contact', label: 'Contact', icon: '📍' }
+        ].map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => setActiveTab(tab.id)}
+            style={{
+              flex: 1,
+              padding: '10px 0',
+              background: activeTab === tab.id
+                ? 'linear-gradient(135deg, #8B5CF6, #6366f1)'
+                : 'transparent',
+              borderRadius: '16px',
+              border: 'none',
+              color: activeTab === tab.id ? 'white' : 'rgba(255,255,255,0.5)',
+              fontSize: '0.7rem',
+              fontWeight: '600',
+              cursor: 'pointer',
+              transition: 'all 0.3s ease',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '4px'
+            }}
+          >
+            <span style={{ fontSize: '1.2rem', transform: activeTab === tab.id ? 'scale(1.1)' : 'scale(1)', transition: 'transform 0.2s' }}>{tab.icon}</span>
+            <span style={{ opacity: activeTab === tab.id ? 1 : 0.7 }}>{tab.label}</span>
+          </button>
+        ))}
+      </nav>
+
+      {/* Main Content Area */}
+      <main style={{ paddingTop: '70px', paddingBottom: '100px', minHeight: '100vh' }}>
+        {renderMobileContent()}
+      </main>
+    </div>
+  );
+}
 
 export default App;

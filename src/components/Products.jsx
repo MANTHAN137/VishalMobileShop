@@ -165,37 +165,44 @@ const Products = () => {
         : products.filter(p => p.category === activeCategory);
 
     return (
-        <section id="products" style={{ padding: '5rem 0' }}>
-            <div className="container">
-                <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
-                    <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Trending <span className="gradient-text">Hits</span></h2>
+        <section id="products" className="section-padding" style={{ position: 'relative' }}>
+            {/* Background glow for premium feel */}
+            <div style={{
+                position: 'absolute', top: '20%', left: '-10%', width: '300px', height: '300px',
+                background: 'radial-gradient(circle, rgba(139,92,246,0.1), transparent 70%)',
+                filter: 'blur(60px)', zIndex: -1
+            }} />
+
+            <div className="container animate-fade-in-up">
+                <div style={{ textAlign: 'center', marginBottom: '2rem' }}>
+                    <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Trending <span className="gradient-text">Hits</span></h2>
                     <p style={{ color: 'var(--text-muted)' }}>The most popular smartphones everyone is talking about!</p>
                 </div>
 
                 {/* Categories Tab */}
-                <div style={{
+                <div className="no-scrollbar" style={{
                     display: 'flex',
-                    justifyContent: 'center',
-                    gap: '1rem',
-                    marginBottom: '3rem',
+                    justifyContent: 'center', // Centered on desktop, but for mobile we might want scrolling if many items
+                    gap: '12px',
+                    marginBottom: '2.5rem',
                     flexWrap: 'wrap'
                 }}>
                     {categories.map(cat => (
                         <button
                             key={cat.id}
                             onClick={() => setActiveCategory(cat.id)}
-                            className={activeCategory === cat.id ? 'btn-primary' : 'btn-outline'}
                             style={{
-                                padding: '0.6rem 1.5rem',
-                                borderRadius: '25px',
-                                border: '1px solid',
-                                borderColor: activeCategory === cat.id ? 'transparent' : 'rgba(255,255,255,0.2)',
-                                background: activeCategory === cat.id ? 'var(--primary)' : 'transparent',
-                                color: 'white',
+                                padding: '10px 24px',
+                                borderRadius: '100px',
+                                border: activeCategory === cat.id ? 'none' : '1px solid rgba(255,255,255,0.1)',
+                                background: activeCategory === cat.id ? 'linear-gradient(90deg, #8B5CF6, #06B6D4)' : 'rgba(255,255,255,0.03)',
+                                color: activeCategory === cat.id ? 'white' : 'rgba(255,255,255,0.7)',
                                 cursor: 'pointer',
                                 transition: 'all 0.3s ease',
                                 fontSize: '0.9rem',
-                                fontWeight: '600'
+                                fontWeight: '600',
+                                boxShadow: activeCategory === cat.id ? '0 4px 15px rgba(139,92,246,0.3)' : 'none',
+                                whiteSpace: 'nowrap'
                             }}
                         >
                             {cat.label}
@@ -203,14 +210,23 @@ const Products = () => {
                     ))}
                 </div>
 
-                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
-                    {filteredProducts.map(product => (
-                        <div key={product.id} className="glass-panel" style={{ overflow: 'hidden', padding: '1rem', transition: 'transform 0.3s' }}>
+                <div style={{
+                    display: 'grid',
+                    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
+                    gap: '1.5rem',
+                    justifyContent: 'center'
+                }}>
+                    {filteredProducts.map((product, index) => (
+                        <div key={product.id} className="glass-effect premium-card animate-scale-in"
+                            style={{
+                                overflow: 'hidden', padding: '16px', borderRadius: '24px',
+                                animationDelay: `${index * 0.05}s` // Staggered animation
+                            }}>
                             <div style={{
-                                borderRadius: '0.5rem',
+                                borderRadius: '16px',
                                 overflow: 'hidden',
-                                marginBottom: '1.5rem',
-                                aspectRatio: '1.5',
+                                marginBottom: '1.2rem',
+                                aspectRatio: '4/3',
                                 position: 'relative'
                             }}>
                                 <img
@@ -220,15 +236,33 @@ const Products = () => {
                                     onMouseOver={(e) => e.target.style.transform = 'scale(1.1)'}
                                     onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
                                 />
-                                <div style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(0,0,0,0.85)', padding: '5px 10px', borderRadius: '6px', fontSize: '0.75rem', color: '#fff', fontWeight: '600' }}>
+                                <div style={{
+                                    position: 'absolute', top: '12px', right: '12px',
+                                    background: 'rgba(0,0,0,0.8)', backdropFilter: 'blur(4px)',
+                                    padding: '6px 12px', borderRadius: '30px',
+                                    fontSize: '0.7rem', color: '#fff', fontWeight: '700',
+                                    border: '1px solid rgba(255,255,255,0.1)'
+                                }}>
                                     {product.tag}
                                 </div>
                             </div>
                             <div>
-                                <span style={{ fontSize: '0.8rem', color: 'var(--gold)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>{product.brand}</span>
-                                <h3 style={{ fontSize: '1.25rem', margin: '0.5rem 0' }}>{product.name}</h3>
-                                <p style={{ color: 'var(--gold)', marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '700' }}>{product.price}</p>
-                                <a href={`https://wa.me/919370763601?text=Hi, I am interested in ${product.name}`} target="_blank" rel="noopener noreferrer" style={{ width: '100%' }} className="btn btn-outline">Enquire Now</a>
+                                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px' }}>
+                                    <span style={{ fontSize: '0.75rem', color: 'rgba(255,255,255,0.6)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>{product.brand}</span>
+                                    <div style={{ fontSize: '0.8rem', color: '#FBC02D' }}>★★★★★</div>
+                                </div>
+                                <h3 style={{ fontSize: '1.2rem', marginBottom: '8px', fontWeight: '700' }}>{product.name}</h3>
+                                <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: '16px' }}>
+                                    <span style={{ color: 'white', fontSize: '1.2rem', fontWeight: '700' }}>{product.price}</span>
+                                    <a href={`https://wa.me/919370763601?text=Hi, I am interested in ${product.name}`} target="_blank" rel="noopener noreferrer"
+                                        className="btn-primary"
+                                        style={{
+                                            padding: '8px 20px', fontSize: '0.85rem', borderRadius: '12px', textDecoration: 'none',
+                                            display: 'inline-block'
+                                        }}>
+                                        Buy Now
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     ))}
