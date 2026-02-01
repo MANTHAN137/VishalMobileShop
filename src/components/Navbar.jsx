@@ -88,17 +88,17 @@ const Navbar = () => {
         <div
           style={{
             position: 'fixed',
-            top: '60px',
+            top: 0,
             left: 0,
             right: 0,
             bottom: 0,
-            background: 'rgba(10, 10, 10, 0.98)',
-            backdropFilter: 'blur(20px)',
+            background: '#0a0a0a',
             display: 'flex',
             flexDirection: 'column',
-            padding: '2rem',
-            gap: '1.5rem',
-            zIndex: 999
+            padding: '5rem 2rem 2rem 2rem',
+            gap: '1rem',
+            zIndex: 998,
+            overflowY: 'auto'
           }}
         >
           <a href="#home" onClick={closeMenu} style={{ fontSize: '1.2rem', fontWeight: '600', padding: '0.5rem 0' }}>Home</a>

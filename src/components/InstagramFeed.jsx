@@ -9,12 +9,12 @@ const reels = [
 
 const InstagramFeed = () => {
     return (
-        <section style={{ padding: '5rem 0', background: 'var(--bg-dark)' }}>
+        <section style={{ padding: '3rem 0', background: 'var(--bg-dark)' }}>
             <div className="container">
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'end', marginBottom: '3rem', flexWrap: 'wrap', gap: '1rem' }}>
+                <div className="reels-header">
                     <div>
-                        <h2 style={{ fontSize: '2.5rem', marginBottom: '0.5rem' }}>Watch Our <span className="gradient-text">Reels</span></h2>
-                        <p style={{ color: 'var(--text-muted)' }}>Stay updated with our latest offers and new arrivals!</p>
+                        <h2 className="reels-title">Watch Our <span className="gradient-text">Reels</span></h2>
+                        <p style={{ color: 'var(--text-muted)', fontSize: '0.95rem' }}>Stay updated with our latest offers!</p>
                     </div>
                     <a
                         href="https://www.instagram.com/badnera_phonewala/?hl=en"
@@ -26,27 +26,16 @@ const InstagramFeed = () => {
                     </a>
                 </div>
 
-                <div style={{
-                    display: 'grid',
-                    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-                    gap: '1.5rem',
-                    justifyItems: 'center'
-                }}>
+                <div className="reels-grid">
                     {reels.map(reel => (
                         <div
                             key={reel.id}
-                            className="glass-panel"
-                            style={{
-                                overflow: 'hidden',
-                                borderRadius: '1rem',
-                                width: '100%',
-                                maxWidth: '350px'
-                            }}
+                            className="reel-card glass-panel"
                         >
                             <iframe
                                 src={reel.embedUrl}
                                 width="100%"
-                                height="500"
+                                height="400"
                                 frameBorder="0"
                                 scrolling="no"
                                 allowTransparency="true"
@@ -58,6 +47,61 @@ const InstagramFeed = () => {
                     ))}
                 </div>
             </div>
+
+            <style>{`
+                .reels-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: end;
+                    margin-bottom: 2rem;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                }
+                
+                .reels-title {
+                    font-size: 2rem;
+                    margin-bottom: 0.5rem;
+                }
+                
+                .reels-grid {
+                    display: grid;
+                    grid-template-columns: repeat(4, 1fr);
+                    gap: 1rem;
+                }
+                
+                .reel-card {
+                    overflow: hidden;
+                    border-radius: 0.75rem;
+                    width: 100%;
+                }
+                
+                @media (max-width: 1200px) {
+                    .reels-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                }
+                
+                @media (max-width: 768px) {
+                    .reels-title {
+                        font-size: 1.5rem;
+                    }
+                    
+                    .reels-grid {
+                        grid-template-columns: 1fr;
+                        gap: 1rem;
+                    }
+                    
+                    .reel-card iframe {
+                        height: 350px !important;
+                    }
+                }
+                
+                @media (max-width: 480px) {
+                    .reel-card iframe {
+                        height: 300px !important;
+                    }
+                }
+            `}</style>
         </section>
     );
 };
