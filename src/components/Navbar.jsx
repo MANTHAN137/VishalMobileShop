@@ -69,15 +69,7 @@ const Navbar = () => {
         <button
           className="mobile-menu-btn"
           onClick={() => setMenuOpen(!menuOpen)}
-          style={{
-            display: 'none',
-            background: 'transparent',
-            border: 'none',
-            color: 'white',
-            fontSize: '1.5rem',
-            cursor: 'pointer',
-            padding: '0.5rem'
-          }}
+          aria-label="Toggle menu"
         >
           {menuOpen ? '✕' : '☰'}
         </button>
@@ -134,6 +126,17 @@ const Navbar = () => {
       )}
 
       <style>{`
+        .mobile-menu-btn {
+          display: none;
+          background: transparent;
+          border: none;
+          color: white;
+          font-size: 1.5rem;
+          cursor: pointer;
+          padding: 0.5rem;
+          z-index: 1001;
+        }
+        
         @media (max-width: 768px) {
           .desktop-nav {
             display: none !important;
