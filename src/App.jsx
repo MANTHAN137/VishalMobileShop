@@ -41,7 +41,7 @@ function App() {
   // Desktop Version (original scrolling layout)
   if (!isMobile) {
     return (
-      <div className="App">
+      <div className="App" style={{ background: '#0a0a0a', minHeight: '100vh' }}>
         <DesktopNavbar />
         <DesktopHero />
         <Products />
@@ -54,7 +54,7 @@ function App() {
 
   // Mobile Version (tab-based)
   return (
-    <div className="App">
+    <div className="App" style={{ background: '#0a0a0a', minHeight: '100vh' }}>
       {/* Mobile Header */}
       <header style={{
         position: 'fixed',
@@ -119,7 +119,7 @@ function App() {
       </nav>
 
       {/* Tab Content */}
-      <main style={{ paddingTop: '100px', minHeight: '100vh' }}>
+      <main style={{ paddingTop: '100px', minHeight: '100vh', background: '#0a0a0a' }}>
         {renderMobileContent()}
       </main>
 
