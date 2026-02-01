@@ -1,0 +1,183 @@
+import React from 'react';
+
+const products = [
+    // BUDGET RANGE (₹10K - ₹25K)
+    {
+        id: 1,
+        name: "Redmi Note 13 Pro",
+        price: "₹18,999",
+        brand: "Xiaomi",
+        tag: "💰 Best Seller",
+        image: "https://placehold.co/600x400/1e1e1e/ff6b00?text=Redmi+Note+13+Pro"
+    },
+    {
+        id: 2,
+        name: "Realme Narzo 70 Pro",
+        price: "₹19,999",
+        brand: "Realme",
+        tag: "📸 Camera King",
+        image: "https://placehold.co/600x400/1e1e1e/ffcc00?text=Narzo+70+Pro"
+    },
+    {
+        id: 3,
+        name: "Poco M7 Pro",
+        price: "₹14,999",
+        brand: "Poco",
+        tag: "🔥 Budget Hero",
+        image: "https://placehold.co/600x400/1e1e1e/ffc107?text=Poco+M7+Pro"
+    },
+    {
+        id: 4,
+        name: "Samsung Galaxy A35",
+        price: "₹24,999",
+        brand: "Samsung",
+        tag: "⭐ Reliable",
+        image: "https://placehold.co/600x400/1e1e1e/1428a0?text=Galaxy+A35"
+    },
+    // MID RANGE (₹25K - ₹45K)
+    {
+        id: 5,
+        name: "OnePlus Nord 4",
+        price: "₹29,999",
+        brand: "OnePlus",
+        tag: "⚡ Fast & Smooth",
+        image: "https://placehold.co/600x400/1e1e1e/f50514?text=Nord+4"
+    },
+    {
+        id: 6,
+        name: "Vivo V40",
+        price: "₹34,999",
+        brand: "Vivo",
+        tag: "📷 Portrait Pro",
+        image: "https://placehold.co/600x400/1e1e1e/4169e1?text=Vivo+V40"
+    },
+    {
+        id: 7,
+        name: "Poco F7 Pro",
+        price: "₹34,999",
+        brand: "Poco",
+        tag: "🎮 Gaming Beast",
+        image: "https://placehold.co/600x400/1e1e1e/ffc107?text=Poco+F7+Pro"
+    },
+    {
+        id: 8,
+        name: "Samsung Galaxy A56",
+        price: "₹37,999",
+        brand: "Samsung",
+        tag: "🛡️ Premium Build",
+        image: "https://placehold.co/600x400/1e1e1e/1428a0?text=Galaxy+A56"
+    },
+    {
+        id: 9,
+        name: "iQOO Neo 10 Pro",
+        price: "₹38,999",
+        brand: "iQOO",
+        tag: "🏆 Value King",
+        image: "https://placehold.co/600x400/1e1e1e/ff6600?text=iQOO+Neo+10+Pro"
+    },
+    {
+        id: 10,
+        name: "OnePlus 13R",
+        price: "₹42,999",
+        brand: "OnePlus",
+        tag: "💯 Popular Pick",
+        image: "https://placehold.co/600x400/1e1e1e/f50514?text=OnePlus+13R"
+    },
+    // HIGH RANGE (₹45K - ₹90K)
+    {
+        id: 11,
+        name: "iQOO 13",
+        price: "₹54,999",
+        brand: "iQOO",
+        tag: "⚡ Flagship Killer",
+        image: "https://placehold.co/600x400/1e1e1e/ff6600?text=iQOO+13"
+    },
+    {
+        id: 12,
+        name: "Nothing Phone (3)",
+        price: "₹54,999",
+        brand: "Nothing",
+        tag: "💡 Unique Style",
+        image: "https://placehold.co/600x400/1e1e1e/ffffff?text=Nothing+Phone+3"
+    },
+    {
+        id: 13,
+        name: "Realme GT 7 Pro",
+        price: "₹59,999",
+        brand: "Realme",
+        tag: "🚀 Power Packed",
+        image: "https://placehold.co/600x400/1e1e1e/ffcc00?text=GT+7+Pro"
+    },
+    {
+        id: 14,
+        name: "Vivo X200",
+        price: "₹65,999",
+        brand: "Vivo",
+        tag: "📸 Camera Pro",
+        image: "https://placehold.co/600x400/1e1e1e/4169e1?text=Vivo+X200"
+    },
+    {
+        id: 15,
+        name: "OnePlus 13",
+        price: "₹69,999",
+        brand: "OnePlus",
+        tag: "🔥 Flagship",
+        image: "https://placehold.co/600x400/1e1e1e/f50514?text=OnePlus+13"
+    },
+    {
+        id: 16,
+        name: "Samsung S25",
+        price: "₹80,999",
+        brand: "Samsung",
+        tag: "🆕 Latest Launch",
+        image: "https://placehold.co/600x400/1e1e1e/1428a0?text=Galaxy+S25"
+    }
+];
+
+
+const Products = () => {
+    return (
+        <section id="products" style={{ padding: '5rem 0' }}>
+            <div className="container">
+                <div style={{ textAlign: 'center', marginBottom: '4rem' }}>
+                    <h2 style={{ fontSize: '3rem', marginBottom: '1rem' }}>Trending <span className="gradient-text">Hits</span></h2>
+                    <p style={{ color: 'var(--text-muted)' }}>The most popular smartphones everyone is talking about!</p>
+                </div>
+
+
+                <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '2rem' }}>
+                    {products.map(product => (
+                        <div key={product.id} className="glass-panel" style={{ overflow: 'hidden', padding: '1rem', transition: 'transform 0.3s' }}>
+                            <div style={{
+                                borderRadius: '0.5rem',
+                                overflow: 'hidden',
+                                marginBottom: '1.5rem',
+                                aspectRatio: '1.5',
+                                position: 'relative'
+                            }}>
+                                <img
+                                    src={product.image}
+                                    alt={product.name}
+                                    style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.5s' }}
+                                    onMouseOver={(e) => e.target.style.transform = 'scale(1.1)'}
+                                    onMouseOut={(e) => e.target.style.transform = 'scale(1)'}
+                                />
+                                <div style={{ position: 'absolute', top: '10px', right: '10px', background: 'rgba(0,0,0,0.85)', padding: '5px 10px', borderRadius: '6px', fontSize: '0.75rem', color: '#fff', fontWeight: '600' }}>
+                                    {product.tag}
+                                </div>
+                            </div>
+                            <div>
+                                <span style={{ fontSize: '0.8rem', color: 'var(--gold)', fontWeight: '600', textTransform: 'uppercase', letterSpacing: '1px' }}>{product.brand}</span>
+                                <h3 style={{ fontSize: '1.25rem', margin: '0.5rem 0' }}>{product.name}</h3>
+                                <p style={{ color: 'var(--gold)', marginBottom: '1.5rem', fontSize: '1.1rem', fontWeight: '700' }}>{product.price}</p>
+                                <a href={`https://wa.me/919370763601?text=Hi, I am interested in ${product.name}`} target="_blank" rel="noopener noreferrer" style={{ width: '100%' }} className="btn btn-outline">Enquire Now</a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+        </section>
+    );
+};
+
+export default Products;
